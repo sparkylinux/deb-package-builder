@@ -1,0 +1,65 @@
+#Arquivo de localização para o Português do Brasil do  aplicativo Construtor de Pacote Debian.
+# Copyright 2015 PaweÅ‚ "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/27
+# Sob a licença GNU GPL v2
+# Última atualização 2015/12/08
+# Traduzido por Claudio Cesar de Sá "ccs1664" <ccs1664@gmail.com> 2015/12/06
+
+
+LOCAL1="Nome"
+LOCAL2="Descrição"
+LOCAL3="Construtor de Pacote Debian"
+LOCAL4="Não pode encontrar o  Yad. Saindo..."
+LOCAL5="Esta é uma ferramenta para criar um simples pacote Debian.\n\nPor gentileza, confirme que todos os arquivos binários e os arquivos de suporte para o seu pacote estejam apropriadamente instalados no  sistema, antes de tentar criar um pacote. Pois esta ferramenta colocará os pacotes  exatamente onde eles foram encontrados sobre o seu sistema.\n\nExemplo: se voce está criando um pacote de um aplicativo em binário, seus binários devem estar em: \n\/usr\/bin \nou \n\/usr\/local\/bin \n\nOs menus de entradas serão criados com esta ferramenta e voce pode editá-los antes da criação final do pacote.\n\nVoce deseja continuar?"
+LOCAL6="Por gentileza, selecione uma opção:"
+LOCAL7="Criar um novo pacote"
+LOCAL8="Reempacotar um pacote  existente"
+LOCAL9="Desempacotar um arquivo DEB existente"
+LOCAL10="Saída"
+LOCAL11="Selecione o diretório do pacote para ser reempacotado"
+LOCAL12="Selecione o pacote DEB para desempacotar"
+LOCAL13="desempacotar para"
+LOCAL14="Por gentileza, digite o nome de uso do  pacote DEB que voce quer definirr.\n\nEste nome deveria ser em letras minúsculas e somente um carácter especial é permitido entre os nomes: '-' (o sinal de menos entre os nomes).\n\nExemplo: nome-do-pacote ou nomedopacote"
+LOCAL15="Por gentileza, digite o número da versão que voce deseja usar
+para uso do  pacote deb.\n\nExemplo: 1.0-1"
+LOCAL16="Por gentileza, digite o tipo da arquitetura para o  pacote DEB.\n\nExemplo:  i386, amd64 ou todos"
+LOCAL17="Por gentileza, digite o seu nome para ser listado como Mantenedor (Maintainer).\n\nExemplo:  John Doe"
+LOCAL18="Por gentileza, digite em  email o seu correio eletrônico para ser listado como Mantenedor (Maintainer)..\n\nExemplo:  John_Doe@email.org"
+LOCAL19="Por gentileza, digite os nomes dos pacotes que sua
+aplicação depende com vírgula entre os nomes.\n\nExemplo:  coreutils, bash, zenity"
+LOCAL20="Por gentileza, digite os nomes do(s) pacote(s) (se algum) em conflito, e estes com vírgula entre os nomes.\n\nCaso contrário deixe este campo em branco."
+LOCAL21="Criando a descrição do pacote.\nPor gentileza, digite o nome da aplicação.\n\nExemplo:  Nome da Aplicação ou ApplicationName"
+LOCAL22="Por gentileza, digite a descrição do pacote.\n\nExemplo:  Este pacote faz alguma coisa especial"
+LOCAL23="Este  pacote tem algum binário que necessitará ser acessado de algum menu?"
+LOCAL24="Voce necessitará  adicionar pelo menos um (1) arquivo binário.\n\nEste também ajudará a voce criar o arquivo .desktop para o menu  normal ou padrão \ne vai criar uma entrada no  menu padrão/default do  Debian." 
+LOCAL25="Adicione um executável"
+LOCAL26="Continue"
+LOCAL27="Por gentileza, selecione qual  é  o  submenu que voce deseja
+adicionar a sua aplicação."
+LOCAL28="Saindo agora..."
+LOCAL29="Selecione um arquivo binário o qual será  adicionado para o"
+LOCAL30="Submenu"
+LOCAL41="Selecione o icon para"
+LOCAL42="Por gentileza, digite o nome que voce deseja mostrar no  Menu"
+LOCAL43="Por gentileza, digite uma breve descrição do que esta  aplicação faz"
+LOCAL44="Finalizando a Inclusão"
+LOCAL45="para o  pacote."
+LOCAL46="Selecione a  License para"
+LOCAL47="Aqui voce pode adicionar arquivos e  diretórios para o pacote"
+LOCAL48="Adicione um arquivo para o pacote"
+LOCAL49="Adicione um diretório para o pacote"
+LOCAL50="Construindo  o novo  pacote DEB agora.\n\nPor gentileza, aguarde..."
+LOCAL51="Selecione um arquivo para adicionar ao  pacote"
+LOCAL52="Aqui voce pode verificar e editar todos os arquivos dentro do  pacote"
+LOCAL53="Editar ou verificar um arquivo dentro do pacote"
+LOCAL54="Selecione o arquivo para  editar"
+LOCAL55="Voce quer construir o pacote  DEB agora?"
+LOCAL56="Se tudo transcorreu bem, o seu pacote deveria ser chamado de:"
+LOCAL57="e"
+LOCAL58="está no"
+LOCAL59="diretório."
+LOCAL60="Não"
+LOCAL61="Selecione um diretório para adiconar o pacote"
+
+### .desktop file to be translated too
+# Name[pt_BR]=Construtor de Pacotes Deb
+# Comment[pt_BR]=Constrói Pacotes Deb Isolados

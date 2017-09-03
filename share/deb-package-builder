@@ -1,0 +1,1 @@
+?package(deb-package-builder):needs="X11" section="Applications/System"        title="Deb Package Builder" command="remsu /usr/bin/deb-package-builder" icon="gnome-mime-application-x-deb"

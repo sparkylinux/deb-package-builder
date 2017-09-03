@@ -1,0 +1,27 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Deb Package Builder
+Name[es_AR]=Constructor de Paquetes DEB
+Name[fr_FR]=Constructeur de paquet DEB
+Name[ja_JP]=Deb パッケージビルダー
+Name[pl_PL]=Budowanie Pakietów Deb
+Name[pt_BR]=Construtor de Pacotes Deb
+Name[pt_PT]=Construtor de pacotes Deb (Debian)
+Name[ru_RU]=Построитель Deb-пакетов
+GenericName=Deb Package Builder
+Comment=Builds Simple Deb Packages
+Comment[es_AR]=Construye Paquetes Deb Sencillos
+Comment[fr_FR]=Créer de simples paquets Debian
+Comment[it_IT]=Costruisce pacchetti DEB semplici
+Comment[ja_JP]=Deb パッケージの構築
+Comment[pl_PL]=Narzędzie do budowania pakietów Deb
+Comment[pt_BR]=Constrói Pacotes Deb Isolados
+Comment[pt_PT]=Constrói Pacotes Deb Simples
+Comment[ru_RU]=Создаёт простые Deb-пакеты
+Exec=remsu /usr/bin/deb-package-builder
+Icon=gnome-mime-application-x-deb
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Applications;System

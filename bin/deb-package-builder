@@ -1,0 +1,477 @@
+#!/bin/bash
+# Deb Builder
+#
+# Simple tool to create very basic deb files for your own binary/script apps
+#
+# Copyright 2011 Tony Brijeski <tb6517@yahoo.com>
+# Licensed under the GPLv2 license
+# see /usr/share/common-licenses/GPL-2
+#
+# Remastered by Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2014/08/11 under the GPLv2 license
+# Copyright 2014, 2015, 2016 Paweł Pijanowski
+# Ranamed from: 'deb-builder' to 'deb-package-builder'.
+# Added conflict option, separated description for: description title and description text,
+# locales support and moved from zenity to yad.
+# Last update 2016/06/30
+
+# get default's locale file
+DEFLOCDIR="/usr/share/sparky/deb-package-builder"
+if [ "`cat /etc/default/locale | grep es_AR`" != "" ]; then
+. $DEFLOCDIR/es
+elif [ "`cat /etc/default/locale | grep fr_FR`" != "" ]; then
+. $DEFLOCDIR/fr
+elif [ "`cat /etc/default/locale | grep it_IT`" != "" ]; then
+. $DEFLOCDIR/it
+elif [ "`cat /etc/default/locale | grep ja_JP`" != "" ]; then
+. $DEFLOCDIR/ja
+elif [ "`cat /etc/default/locale | grep pl_PL`" != "" ]; then
+. $DEFLOCDIR/pl
+elif [ "`cat /etc/default/locale | grep pt_BR`" != "" ]; then
+. $DEFLOCDIR/pt_BR
+elif [ "`cat /etc/default/locale | grep pt_PT`" != "" ]; then
+. $DEFLOCDIR/pt_PT
+elif [ "`cat /etc/default/locale | grep ru_ru`" != "" ]; then
+. $DEFLOCDIR/ru
+else
+. $DEFLOCDIR/en
+fi
+
+testroot="`whoami`"
+
+if [ "$testroot" != "root" ]; then
+	/usr/bin/remsu $0 &
+fi
+
+DIALOGMENU="yad --width=500 --height=430 --window-icon=gnome-mime-application-x-deb --center"
+DIALOG="yad --window-icon=gnome-mime-application-x-deb --center"
+DIALOG700="yad --width=700 --height=600 --window-icon=gnome-mime-application-x-deb --center"
+TITLE="--always-print-result --dialog-sep --image=gnome-mime-application-x-deb --title="
+TEXT="--text="
+EDITTEXT="--text-info --editable --filename="
+FILESELECT="--file-selection"
+MULTIFILESELECT="--file-selection --multiple"
+DIRSELECT="--file-selection --directory"
+ENTRY="--entry "
+ENTRYTEXT="--entry-text "
+MENU="--list --column=$LOCAL1 --column=$LOCAL2"
+YESNO="--button=Ok:0 --button=$LOCAL10:1 "
+YESNO2="--button=Ok:0 --button=$LOCAL60:1 "
+MSGBOX="--button=Ok:0 "
+TITLETEXT="$LOCAL3"
+TEMPFOLDER="/tmp/deb-builder-temp"
+
+if [ "$DIALOG" = "" ]; then
+	echo "$LOCAL4"
+	exit 1
+fi
+
+$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL5"
+
+if [ "$?" != "0" ]; then
+	exit 0
+fi
+
+while [ "$PACKMENU" != "QUIT" ]; do
+
+PACKMENU=`$DIALOGMENU $TITLE"$TITLETEXT" $YESNO $MENU $TEXT"$LOCAL6" \
+NEW "$LOCAL7" \
+REPACK "$LOCAL8" \
+UNPACK "$LOCAL9" \
+QUIT "$LOCAL10"`
+
+if [ "$?" = "0" ]; then
+	PACKMENU=`echo $PACKMENU | cut -d "|" -f 1`
+else
+	exit 0
+fi
+
+if [ "$PACKMENU" = "QUIT" ]; then
+	exit 0
+fi
+
+if [ "$PACKMENU" = "REPACK" ]; then
+
+	#Mode for repacking due to tweaking after initial package creation
+
+	REPKFOLDER=`$DIALOG700 $TITLE"$LOCAL11" $YESNO $DIRSELECT`
+
+	APPDEBFOLDERNAME=`basename $REPKFOLDER`
+	TEMPFOLDER=`dirname $REPKFOLDER`
+
+	#End of repacking mode
+
+elif [ "$PACKMENU" = "UNPACK" ]; then
+
+	#Mode for unpacking existing deb files
+	cd $HOME
+	UNPKDEB=`$DIALOG700 $TITLE"$LOCAL12" $YESNO $FILESELECT`
+	UNPAKDEB=`basename $UNPKDEB`
+	DEBDIR=${UNPAKDEB%.deb}
+	MAINDIR=`dirname $UNPKDEB`
+	cd $MAINDIR
+	DEBIANDIR="$MAINDIR/$DEBDIR/DEBIAN"
+	mkdir -p $MAINDIR/$DEBDIR/DEBIAN
+
+	dpkg -x $UNPKDEB $MAINDIR/$DEBDIR
+	dpkg -e $UNPKDEB $DEBIANDIR
+
+	$DIALOG $TITLE"$TITLETEXT" $MSGBOX $TEXT"$UNPKDEB $LOCAL13 $MAINDIR/$DEBDIR"
+
+	#End of Unpacking mode
+
+else
+
+	#Mode for complete package creation from scratch
+
+	#-----info-----
+	APPDEBNAME=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL14" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	VERSION=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL15" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	ARCH=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL16" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	DEVNAME=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL17" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	DEVEMAIL=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL18" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	DEPENDS=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL19" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	CONFLICTS=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL20" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	DESCRIPTION=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL21" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	DESCRIPTION1=`$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"$LOCAL22" $ENTRY`
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	APPDEBFOLDERNAME=$APPDEBNAME"_"$VERSION"_"$ARCH
+	mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN
+	cp -a /etc/deb-package-builder/DEBIAN/* $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN/
+	mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$APPDEBNAME
+
+	#--------------
+
+	$DIALOG $TITLE"$TITLETEXT" $YESNO2 $TEXT"$LOCAL23"
+	if [ "$?" = "0" ]; then
+
+		#---------------menu itmems----------
+
+		MENUPARTS=""
+		mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/applications
+		mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/menu
+
+		while [ "$MENUPARTS" != "DONE" ]; do
+
+
+		MENUPARTS=`$DIALOGMENU $TITLE"$TITLETEXT" $YESNO $MENU $TEXT"$LOCAL24" \
+		ADD "$LOCAL25" \
+		DONE "$LOCAL26"`
+
+		
+		if [ "$?" = "0" ]; then
+			MENUPARTS=`echo $MENUPARTS | cut -d "|" -f 1`
+		else
+			exit 0
+		fi
+
+
+		if [ "$MENUPARTS" = "ADD" ]; then
+
+			APPCAT=`$DIALOGMENU $TITLE"$TITLETEXT" $YESNO $MENU $TEXT"\n$LOCAL27" \
+			Audio "Audio_Submenu" \
+			Video "Video_Submenu" \
+			Development "Development_Submenu" \
+			Education "Education_Submenu" \
+			Game "Game_Submenu" \
+			Graphics "Graphics_Submenu" \
+			Network "Network_Submenu" \
+			Office "Office_Submenu" \
+			Settings "Settings_Submenu" \
+			System "System_Submenu" \
+			Utility "Utility_Submenu" \
+			Exit "$LOCAL10"`
+
+			if [ "$?" = "0" ]; then
+				APPCAT=`echo $APPCAT | cut -d "|" -f 1`
+			else
+				exit 0
+			fi
+
+			#$APPCATCHOICES`
+
+			if [ "$APPCAT" = "Exit" ]; then
+				$DIALOG $TITLE"$TITLETEXT" $MSGBOX $TEXT"\n\n$LOCAL28"
+				exit 1
+			fi
+
+			if [ "$APPCAT" = "Audio" ]; then
+				SECTION="Applications/Sound"
+				APPCAT="AudioVideo"
+
+			elif [ "$APPCAT" = "Video" ]; then
+				SECTION="Applications/Video"
+				APPCAT="AudioVideo"
+
+			elif [ "$APPCAT" = "Games" ]; then
+				SECTION="Games"
+		
+			else
+				SECTION="Applications/$APPCAT"
+			fi
+
+			cd /usr/local/bin
+			APPEXECBIN=`$DIALOG700 $TITLE"$LOCAL29 $APPCAT $LOCAL30" $YESNO $FILESELECT`
+
+			if [ ! -x $APPEXECBIN ]; then
+				chmod 755 $APPEXECBIN
+			fi
+
+			APPEXECNAME=`basename $APPEXECBIN`
+			APPEXECFOLDER=`dirname $APPEXECBIN`
+			cd /usr/share/icons
+			PPICON=`$DIALOG700 $TITLE"$LOCAL41 $APPEXECNAME" $YESNO $FILESELECT`
+			APPICNNAME=`basename $APPICON`
+			APPICNFOLDER=`dirname $APPICON`
+
+			APPNAME=`$DIALOG $TITLE"$TITLETEXT" $TEXT"$LOCAL42" $YESNO $ENTRY`
+
+			APPCOMMENT=`$DIALOG $TITLE"$TITLETEXT" $TEXT"$LOCAL43" $YESNO $ENTRY`
+
+cat > $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/applications/$APPEXECNAME.desktop <<FOO
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=$APPNAME
+GenericName=$APPNAME
+Comment=$APPCOMMENT
+Exec=$APPEXECBIN
+Icon=$APPICON
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Applications;$APPCAT
+GenericName[en_US]=$APPNAME
+
+FOO
+
+NEEDS="X11"
+
+cat >> $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/menu/$APPDEBNAME <<FOO
+?package($APPDEBNAME):needs="$NEEDS" section="$SECTION"\
+        title="$APPNAME" command="$APPEXECBIN" icon="$APPICON"
+FOO
+
+			mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/$APPEXECFOLDER
+			cp -a $APPEXECBIN $TEMPFOLDER/$APPDEBFOLDERNAME/$APPEXECFOLDER/
+			mkdir -p $TEMPFOLDER/$APPDEBFOLDERNAME/$APPICNFOLDER
+			cp -a $APPICON $TEMPFOLDER/$APPDEBFOLDERNAME/$APPICNFOLDER/
+
+			$DIALOG $TITLE"$TITLETEXT" $MSGBOX $TEXT"\n$LOCAL44 $APPEXECBIN $LOCAL45"
+
+		fi
+
+		done
+
+		#-----------------------------------
+	fi
+
+	DATE=`date +"%a, %d %b %Y %T %z"`
+
+	#-----changelog.Debian-----
+cat > $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$APPDEBNAME/changelog.Debian <<FOO
+$APPDEBNAME ($VERSION) unstable; urgency=low
+
+  *
+
+ -- $DEVNAME <$DEVEMAIL>  $DATE
+
+FOO
+	#--------------------------
+
+	#-----copyright-----
+	cd /usr/share/common-licenses/
+	COPYRIGHT=`$DIALOG700 $TITLE"$LOCAL46 $APPDEBNAME" $YESNO $FILESELECT`
+	cp $COPYRIGHT $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$APPDEBNAME/copyright
+	#-------------------
+
+	#-----extra files-----
+	EXTRAPARTS=""
+	cd /
+	while [ "$EXTRAPARTS" != "DONE" ]; do
+
+	EXTRAPARTS=`$DIALOGMENU $TITLE"$TITLETEXT" $YESNO $MENU $TEXT"\n$LOCAL47\n" \
+	FILE "$LOCAL48" \
+	FOLDER "$LOCAL49" \
+	DONE "$LOCAL26"`
+
+	if [ "$?" = "0" ]; then
+		EXTRAPARTS=`echo $EXTRAPARTS | cut -d "|" -f 1`
+	else
+		exit 0
+	fi
+
+	if [ "$EXTRAPARTS" = "FILE" ]; then
+		EXTRABIN=`$DIALOG700 $TITLE"$LOCAL51" $YESNO $FILESELECT`
+		EXTRANAME=`basename "$EXTRABIN"`
+		EXTRAFOLDER=`dirname "$EXTRABIN"`
+		mkdir -p "$TEMPFOLDER/$APPDEBFOLDERNAME/$EXTRAFOLDER"
+		cp -a "$EXTRABIN" "$TEMPFOLDER/$APPDEBFOLDERNAME/$EXTRAFOLDER/"
+	fi
+
+	if [ "$EXTRAPARTS" = "FOLDER" ]; then
+		EXTRADIR=`$DIALOG700 $TITLE"$LOCAL61" $YESNO $DIRSELECT`
+		mkdir -p "$TEMPFOLDER/$APPDEBFOLDERNAME/$EXTRADIR"
+		rsync -a "$EXTRADIR/" "$TEMPFOLDER/$APPDEBFOLDERNAME/$EXTRADIR/"
+	fi
+
+
+	done
+	#---------------------
+
+	#-----manual edit option-----
+	MANUALEDIT=""
+	cd $TEMPFOLDER/$APPDEBFOLDERNAME/
+	while [ "$MANUALEDIT" != "DONE" ]; do
+
+	MANUALEDIT=`$DIALOGMENU $TITLE"$TITLETEXT" $YESNO $MENU $TEXT"\n$LOCAL52\n" \
+	EDIT "$LOCAL53" \
+	DONE "$LOCAL26"`
+
+	if [ "$?" = "0" ]; then
+		MANUALEDIT=`echo $MANUALEDIT | cut -d "|" -f 1`
+	else
+		exit 0
+	fi
+
+	if [ "$MANUALEDIT" = "EDIT" ]; then
+		PICFILE=`$DIALOG700 $TITLE"$LOCAL54" $YESNO $FILESELECT`
+		$DIALOG --height=500 --width=700 $EDITTEXT$PICFILE > $PICFILE.new
+		cp $PICFILE.new $PICFILE
+		rm $PICFILE.new
+	fi
+
+	done
+	#----------------------------
+
+
+	$DIALOG $TITLE"$TITLETEXT" $YESNO $TEXT"\n\n$LOCAL55"
+	if [ "$?" != "0" ]; then
+		exit 0
+	fi
+
+	#End of Package creation from scratch
+fi
+
+if [ "$PACKMENU" != "UNPACK" ]; then
+
+	#Only do this stuff if we are packing or repacking
+	if [ "$PACKMENU" = "REPACK" ]; then
+		cd $TEMPFOLDER/$APPDEBFOLDERNAME
+		INSTALLEDSIZE=`du -s | awk '{print $1}'`
+		sed -i -e "s/^Installed-Size.*/Installed-Size: $INSTALLEDSIZE/g" $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN/control
+	else
+
+	#-----control-----
+	cd $TEMPFOLDER/$APPDEBFOLDERNAME
+	INSTALLEDSIZE=`du -s | awk '{print $1}'`
+
+		if [ "$CONFLICTS" != "" ]; then
+
+cat > $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN/control <<FOO
+Package: $APPDEBNAME
+Version: $VERSION
+Architecture: $ARCH
+Maintainer: $DEVNAME <$DEVEMAIL>
+Installed-Size: $INSTALLEDSIZE
+Depends: $DEPENDS
+Conflicts: $CONFLICTS
+Section: $APPCAT
+Priority: optional
+Description: $DESCRIPTION
+  $DESCRIPTION1
+
+FOO
+
+		else
+cat > $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN/control <<FOO
+Package: $APPDEBNAME
+Version: $VERSION
+Architecture: $ARCH
+Maintainer: $DEVNAME <$DEVEMAIL>
+Installed-Size: $INSTALLEDSIZE
+Depends: $DEPENDS
+Section: $APPCAT
+Priority: optional
+Description: $DESCRIPTION
+  $DESCRIPTION1
+
+FOO
+#-----------------
+
+		fi
+
+	fi
+
+
+	#Prepare changelog files
+	for i in `ls $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/`; do
+
+	#check if there are doc folder entries and gzip changelogs
+	if [ -e $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.Debian ]; then
+		gzip -9 $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.Debian
+		cp $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.Debian.gz $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.gz
+		rm -f $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.Debian.gz
+		rm -f $TEMPFOLDER/$APPDEBFOLDERNAME/usr/share/doc/$i/changelog.Debian
+	fi
+
+	done
+
+	#-----md5sums-----
+	cd $TEMPFOLDER/$APPDEBFOLDERNAME
+	find [a-z]* -type f | xargs md5sum >> $TEMPFOLDER/$APPDEBFOLDERNAME/DEBIAN/md5sums
+	#-----------------
+
+	# build the DEB package now
+	
+	cd $TEMPFOLDER
+	chown -R root:root $APPDEBFOLDERNAME
+
+	$DIALOG $TITLE"$TITLETEXT" --width=450 --height=70 --no-buttons --progress --pulsate $TEXT"$LOCAL50" &
+
+	dpkg -b $APPDEBFOLDERNAME
+	tar czf $APPDEBFOLDERNAME.tar.gz $APPDEBFOLDERNAME
+	
+	killall -KILL yad
+
+	$DIALOG $TITLE"$TITLETEXT" $MSGBOX $TEXT"\n$LOCAL56 \n$APPDEBFOLDERNAME.deb $LOCAL57 $APPDEBFOLDERNAME.tar.gz \n$LOCAL58 $TEMPFOLDER $LOCAL59"
+
+fi
+
+done
+
+exit 0
