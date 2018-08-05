@@ -1,8 +1,7 @@
 # English localization file for DEB Package Builder.
 # Copyright 2015 Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/29
 # Under the GNU GPL v2
-# Last update 2015/11/02
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Name"
 LOCAL2="Description"
 LOCAL3="Deb Package Builder"
@@ -54,7 +53,6 @@ LOCAL58="in the"
 LOCAL59="folder."
 LOCAL60="No"
 LOCAL61="Select a folder to add to the package"
-
 ### .desktop file to be translated too
 # Name[en_US]=Deb Package Builder
 # Comment[en_US]=Builds Simple Deb Packages

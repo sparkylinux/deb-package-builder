@@ -1,8 +1,7 @@
 # Archivo de localización en español para DEB Package Builder.
 # Copyright 2015 Fernando "seacat" Velo <seacat.linux@gmail.com> 2015/12/22
 # Bajo la licencia GNU GPL v2
-# Ultima actualización 2015/12/30
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Nombre"
 LOCAL2="Descripción"
 LOCAL3="Constructor de Paquetes DEB"
@@ -54,7 +53,6 @@ LOCAL58="en la carpeta"
 LOCAL59="."
 LOCAL60="No"
 LOCAL61="Elija una carpeta para agregar al paquete"
-
 ### .desktop file to be translated too
 # Name[es_AR]=Constructor de Paquetes DEB
 # Comment[es_AR]=Construye Paquetes Deb Sencillos

@@ -1,9 +1,8 @@
 # Polish localization file for DEB Package Builder.
 # Copyright 2015 Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/29
 # Under the GNU GPL v2
-# Last update 2015/11/02
+# Last update 2018/08/05 by pavroo
 # Translated to Polish by pavroo
-
 LOCAL1="Nazwa"
 LOCAL2="Opis"
 LOCAL3="Budowanie pakietów DEB"
@@ -55,7 +54,6 @@ LOCAL58="w folderze"
 LOCAL59=" ."
 LOCAL60="Nie"
 LOCAL61="Wybierz folder aby dodać do pakietu"
-
 ### .desktop file, również do przetłumaczenia
 # Name[pl_PL]=Budowanie pakietów DEB
 # Comment[pl_PL]=Narzędzie do budowania pakietów DEB

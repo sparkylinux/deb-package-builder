@@ -1,8 +1,7 @@
 # Файл русской локализации для DEB Package Builder.
 # Copyright 2016 Igor Klyushnyov <inklu@yandex.ru> 2016/06/28
 # Под лицензией GNU GPL v2
-# Последнее обновление 2016/06/29
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Имя"
 LOCAL2="Описание"
 LOCAL3="Построитель Deb-пакетов"
@@ -54,7 +53,6 @@ LOCAL58="в"
 LOCAL59="каталоге."
 LOCAL60="Нет"
 LOCAL61="Выберите каталог для добавления в пакет"
-
 ### .desktop file to be translated too
 # Name[ru_RU]=Построитель Deb-пакетов
 # Comment[ru_RU]=Создаёт простые Deb-пакеты

@@ -1,8 +1,7 @@
 # Arquivo de localização para Portugues de Portugal do DEB Package Builder.
 # Copyright 2016 Joel Chaves "Flacc" <joel_chaves@icloud.com> Monday 02 February 21:35:00 WET 2016
 # Sob a Licença GNU GPL v2
-# Última atualização Tuesday 02 February 21:35:00 WET 2016
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Nome"
 LOCAL2="Descrição"
 LOCAL3="Construtor de Pacote Deb (para Debian)"
@@ -54,7 +53,6 @@ LOCAL58="no"
 LOCAL59="pasta."
 LOCAL60="Não"
 LOCAL61="Selecione uma pasta para adicionar ao pacote"
-
 ### Arquivo a ser traduzido também .desktop
 # Name[pt_PT]=Construtor de pacotes Deb (Debian)
 # Comment[pt_PT]=Constrói Pacotes Deb Simples

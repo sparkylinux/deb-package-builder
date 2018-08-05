@@ -1,7 +1,7 @@
 Deb Package Builder
 This tool can be used to build simple deb packages
 
-Copyright (C) 2014-2016 Paweł Pijanowski and others, see copyright file.
+Copyright (C) 2014-2018 Paweł Pijanowski and others, see copyright file.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

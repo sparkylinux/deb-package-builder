@@ -1,9 +1,8 @@
 # Japanese localization file for DEB Package Builder.
 # Copyright 2015 Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/29
 # Under the GNU GPL v2
-# Last update 2015/12/23
+# Last update 2018/08/05 by pavroo
 # Translated to Japanese by BALLOON a.k.a. Fu-sen.
-
 LOCAL1="名前"
 LOCAL2="説明"
 LOCAL3="Deb パッケージビルダー"
@@ -55,7 +54,6 @@ LOCAL58="内"
 LOCAL59="フォルダ"
 LOCAL60="いいえ"
 LOCAL61="パッケージへ追加するフォルダを選択"
-
 ### .desktop file to be translated too
 # Name[ja_JP]=Deb パッケージビルダー
 # Comment[ja_JP]=Deb パッケージの構築

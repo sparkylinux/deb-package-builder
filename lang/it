@@ -1,8 +1,7 @@
 # File di localizazione italiano per DEB Package Builder.
 # Copyright 2015 Carlo "malato" Troiani <abassolafrangetta@gmail.com> 2015/10/29
 # rilasciato sotto licenza GNU GPL v2
-# Ultimo aggiornamento  2015/10/29
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Nome"
 LOCAL2="Descrizione"
 LOCAL3="Deb Package Builder"
@@ -54,7 +53,6 @@ LOCAL58="nel"
 LOCAL59="cartella."
 LOCAL60="No"
 LOCAL61="Seleziona una cartella da aggiungere al pacchetto"
-
 ### .desktop file to be translated too
 # Name[it_IT]=Deb Package Builder
 # Comment[it_IT]=Costruisce pacchetti DEB semplici

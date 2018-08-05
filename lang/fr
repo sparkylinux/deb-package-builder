@@ -1,8 +1,7 @@
 ﻿# Fichier de localisation française de DEB Package Builder.
 # Copyright 2016 hiver <hiver@club-internet.fr> 2016/06/05
 # Sous licence GNU GPL v2
-# Dernière mise à jour 2016/06/05
-
+# Last update 2018/08/05 by pavroo
 LOCAL1="Nom"
 LOCAL2="Description"
 LOCAL3="Constructeur de paquets Deb"
@@ -54,7 +53,6 @@ LOCAL58="dans le"
 LOCAL59="répertoire."
 LOCAL60="Non"
 LOCAL61="choisissez un répertoire pour ajouter le paquet"
-
 ### .desktop file to be translated too
 # Name[fr_FR]=Constructeur de paquet DEB
 # Comment[fr_FR]=Créer de simples paquets Debian
