@@ -1,0 +1,59 @@
+# Hungarian localization file for DEB Package Builder.
+# Copyright 2015 Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/29
+# Under the GNU GPL v2
+# Last update 2018/08/05 by pavroo
+LOCAL1="Név"
+LOCAL2="Leírás"
+LOCAL3="Deb Package Builder (Deb Csomag Építő)"
+LOCAL4="Nem található „Yad”. Kilépés..."
+LOCAL5="Ez egy eszköz egyszerű Debian csomag létrehozásához.\n\nKérjük, legyen biztos benne, hogy az összes két operandusú (bináris) és támogatás fájl helyesen telepített a rendszerében, mert ez az eszköz pontosan oda fogja elhelyezni a csomagban azokat, ahol a rendszer található.\n\nPéldául, ha egy bináris alkalmazás csomagot készít, az Ön binárisai szintén itt lehetnek: \n\/usr\/bin \nor \n\/usr\/local\/bin \n\nEz az eszköz elkészíti a Menü bejegyzését (entries) és azokat a végleges csomag készítés előtt javítani tudja.\n\nKívánja folytatni?"
+LOCAL6="Kérjük, válasszon opciót!"
+LOCAL7="Hozzon létre új csomagot!"
+LOCAL8="Csomagolja újra a létező csomagot"
+LOCAL9="Csomagolja ki a létező deb fájlt!"
+LOCAL10="Kilépés"
+LOCAL11="Válassza ki az újracsomagoláshoz a csomag mappáját!"
+LOCAL12="Válassza ki a kicsomagolandó deb csomagot!"
+LOCAL13="Kicsomagolva a ….-ba"
+LOCAL14="Kérjük, írja be a használni kívánt deb csomag nevét!\n\nLehetnek kisbetűk és csak különleges karakterek megengedettek a '-' nevek között.\n\nPéldául csomag-név vagy csomagnév"
+LOCAL15="Kérjük, írja be a használni kívánt deb csomag nevét!\n\nPéldául
+1.0-1"
+LOCAL16="Kérjük, írja be a deb csomag szerkezet (struktúra) típusát!\n\nPéldául. i386, amd64 vagy összes"
+LOCAL17="Kérjük, írja be nevét a Karbantartóként (Maintainer) történő listázásához!\n\nPéldául John Doe"
+LOCAL18=" Kérjük, írja be e-levél címét a Karbantartóként (Maintainer) történő listázásához!\n\nPéldául Doe@email.org
+LOCAL19="Írja be a csomagok neveit, mert alkalmazása függ a nevek közti vesszőtől!\n\nPl. coreutils, bash, zenity"
+LOCAL20="Írja be a problémás csomag/csomagok, ha vannak, vesszővel elválasztva a neveket!\n\nEgyébként hagyja a mezőt üresen"
+LOCAL21="Csomagleírás létrehozása.\nKérjük, írja be az alkalmazás nevét!\n\nPl. Alkalmazás neve vagy Alkalmazásnév"
+LOCAL22="Kérjük, írja be az alkalmazás leírását!\n\nPl. Ez valami különlegeset csinál"
+LOCAL23="Bír valamilyen binárissal ez a csomag, hogy szükséges a menüből elérni?
+LOCAL24="Szükséges lesz legalább egy bináris fájlt hozzáadjon.\n\nEz is segíteni fog Önnek a normál menühöz asztal fájl létrehozásában \nés létrehoz menü beviteli lehetőséget a standard Debian menünek."
+LOCAL25="Adjon egy végrehajthatót"
+LOCAL26="Folytatás"
+LOCAL27="Kérjük, válassza ki, melyik almenühöz kíván alkalmazást hozzáadni!
+LOCAL28="Kilépés most..."
+LOCAL29="Válasszon bináris fájlt amelyik hozzá lesz adva ...-hoz!
+LOCAL30="Almenü"
+LOCAL41="Válasszon ikont a ...-nak!"
+LOCAL42="Kérjük, írja be a nevet, amelyet láttatni kíván a Menüben!”
+LOCAL43="Kérjük, adjon rövid leírást, mit tesz az alkalmazás”
+LOCAL44="Hozzáadás befejezve"
+LOCAL45="a csomaghoz."
+LOCAL46="Válassza ki a ….. Licenc-szét!”
+LOCAL47="Itt tud hozzáadni fájlokat és mappákat a csomaghoz”
+LOCAL48="Adja hozzá a fájlt a csomaghoz!”
+LOCAL49="Adja hozzá a mappát a csomaghoz!”
+LOCAL50="Új DEB csomag építése most.\n\nKérjük, várjon..."
+LOCAL51="Válasszon fájlt a csomaghoz adáshoz!”
+LOCAL52="Itt tudja ellenőrizni és javítani a csomag összes fájlját.”
+LOCAL53="Javítsa vagy ellenőrizze a fájlt a csomagban!”
+LOCAL54="Válassza ki a javitandó fájlt!”
+LOCAL55="Kíván most DEB csomagot építeni?”
+LOCAL56="Ha minden rendben ment, Önnek csomagjai lehetnek a következő nevekkel:”
+LOCAL57="és"
+LOCAL58="-ban/ben"
+LOCAL59="mappa."
+LOCAL60="Nem"
+LOCAL61="Válasszon mappát a csomaghoz adáshoz!
+### .desktop file to be translated too
+# Name[en_US]=Deb Package Builder
+# Comment[en_US]=Builds Simple Deb Packages
