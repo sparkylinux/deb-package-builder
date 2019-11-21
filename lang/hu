@@ -1,4 +1,4 @@
-# Hungarian localization file for DEB Package Builder.
+# Hungarian localization file for DEB Package Builder. (Translated by Nemomen)
 # Copyright 2015 Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2015/10/29
 # Under the GNU GPL v2
 # Last update 2018/08/05 by pavroo
@@ -22,7 +22,7 @@ LOCAL16="Kérjük, írja be a deb csomag szerkezet (struktúra) típusát!\n\nP�
 LOCAL17="Kérjük, írja be nevét a Karbantartóként (Maintainer) történő listázásához!\n\nPéldául John Doe"
 LOCAL18=" Kérjük, írja be e-levél címét a Karbantartóként (Maintainer) történő listázásához!\n\nPéldául Doe@email.org
 LOCAL19="Írja be a csomagok neveit, mert alkalmazása függ a nevek közti vesszőtől!\n\nPl. coreutils, bash, zenity"
-LOCAL20="Írja be a problémás csomag/csomagok, ha vannak, vesszővel elválasztva a neveket!\n\nEgyébként hagyja a mezőt üresen"
+LOCAL20="Írja be a problémás csomag/csomagok nevét/neveit, (ha vannak), vesszővel elválasztva a neveket!\n\nEgyébként hagyja a mezőt üresen"
 LOCAL21="Csomagleírás létrehozása.\nKérjük, írja be az alkalmazás nevét!\n\nPl. Alkalmazás neve vagy Alkalmazásnév"
 LOCAL22="Kérjük, írja be az alkalmazás leírását!\n\nPl. Ez valami különlegeset csinál"
 LOCAL23="Bír valamilyen binárissal ez a csomag, hogy szükséges a menüből elérni?
