@@ -8,35 +8,35 @@
 # see /usr/share/common-licenses/GPL-2
 #
 # Remastered by Paweł "pavroo" Pijanowski <pavroo@onet.eu> 2014/08/11 under the GPLv2 license
-# Copyright 2014-2019 Paweł Pijanowski
+# Copyright 2014-2020 Paweł Pijanowski
 # Renamed from: 'deb-builder' to 'deb-package-builder'.
 # Added conflict option, separated description for: description title and description text,
 # locales support and moved from zenity to yad.
-# Last update 2019/11/21 by pavroo
+# Last update 2020/07/12 by pavroo
 
 # get default's locale file
 DEFLOCDIR="/usr/share/sparky/deb-package-builder"
-if [ "`cat /etc/default/locale | grep el`" != "" ]; then
+if [ "`cat /etc/default/locale | grep LANG=el`" != "" ]; then
 . $DEFLOCDIR/el
-elif [ "`cat /etc/default/locale | grep es`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=es`" != "" ]; then
 . $DEFLOCDIR/es
-elif [ "`cat /etc/default/locale | grep fr`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=fr`" != "" ]; then
 . $DEFLOCDIR/fr
-elif [ "`cat /etc/default/locale | grep hu`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=hu`" != "" ]; then
 . $DEFLOCDIR/hu
-elif [ "`cat /etc/default/locale | grep id_ID`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=id_ID`" != "" ]; then
 . $DEFLOCDIR/id_ID
-elif [ "`cat /etc/default/locale | grep it`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=it`" != "" ]; then
 . $DEFLOCDIR/it
-elif [ "`cat /etc/default/locale | grep ja`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=ja`" != "" ]; then
 . $DEFLOCDIR/ja
-elif [ "`cat /etc/default/locale | grep pl`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=pl`" != "" ]; then
 . $DEFLOCDIR/pl
-elif [ "`cat /etc/default/locale | grep pt_BR`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=pt_BR`" != "" ]; then
 . $DEFLOCDIR/pt_BR
-elif [ "`cat /etc/default/locale | grep pt_PT`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=pt_PT`" != "" ]; then
 . $DEFLOCDIR/pt_PT
-elif [ "`cat /etc/default/locale | grep ru`" != "" ]; then
+elif [ "`cat /etc/default/locale | grep LANG=ru`" != "" ]; then
 . $DEFLOCDIR/ru
 else
 . $DEFLOCDIR/en
@@ -45,7 +45,8 @@ fi
 testroot="`whoami`"
 
 if [ "$testroot" != "root" ]; then
-	/usr/bin/remsu $0 &
+	echo "Must be root... Exiting now..."
+	exit 1
 fi
 
 DIALOGMENU="yad --width=500 --height=430 --window-icon=gnome-mime-application-x-deb --center"
@@ -54,9 +55,9 @@ DIALOG700="yad --width=700 --height=600 --window-icon=gnome-mime-application-x-d
 TITLE="--always-print-result --dialog-sep --image=gnome-mime-application-x-deb --title="
 TEXT="--text="
 EDITTEXT="--text-info --editable --filename="
-FILESELECT="--file-selection"
-MULTIFILESELECT="--file-selection --multiple"
-DIRSELECT="--file-selection --directory"
+FILESELECT="--file"
+MULTIFILESELECT="--file --multiple"
+DIRSELECT="--file --directory"
 ENTRY="--entry "
 ENTRYTEXT="--entry-text "
 MENU="--list --column=$LOCAL1 --column=$LOCAL2"
