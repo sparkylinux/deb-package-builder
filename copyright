@@ -2,7 +2,7 @@ Upstream Author(s):
     Paweł "pavroo" Pijanowski <pavroo@onet.eu> 
 
 Files: *
-    Copyright (C) 2014-2020 Paweł Pijanowski
+    Copyright (C) 2014-2021 Paweł Pijanowski
     Copyright (C) 2007,2008,2009 Tony Brijeski
 
 File: el
@@ -43,6 +43,10 @@ File: pt_PT
 
 File: ru
     Copyright (C) 2016 Igor Klyushnyov <inklu@yandex.ru>
+    License: GPL-2
+
+File: zh_CN
+    Copyright (C) 2021 xingjiapeng
     License: GPL-2
 
 License:
