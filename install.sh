@@ -17,7 +17,7 @@
 if [ "$1" = "uninstall" ]; then
 	rm -rf /etc/deb-package-builder
 	rm -f /usr/bin/deb-package-builder
-	rm -f /usr/lib/sparkycenter/software/deb-package-builder.desktop
+	#rm -f /usr/lib/sparkycenter/software/deb-package-builder.desktop
 	rm -f /usr/share/applications/deb-package-builder.desktop
 	rm -f /usr/share/menu/deb-package-builder
 	rm -rf /usr/share/sparky/deb-package-builder
@@ -27,10 +27,10 @@ else
 	fi
 	cp etc/* /etc/deb-package-builder/DEBIAN/
 	cp bin/* /usr/bin/
-	if [ ! -d /usr/lib/sparkycenter/software ]; then
-		mkdir -p /usr/lib/sparkycenter/software
-	fi
-	cp share/deb-package-builder.desktop /usr/lib/sparkycenter/software/
+	#if [ ! -d /usr/lib/sparkycenter/software ]; then
+	#	mkdir -p /usr/lib/sparkycenter/software
+	#fi
+	#cp share/deb-package-builder.desktop /usr/lib/sparkycenter/software/
 	cp share/deb-package-builder.desktop /usr/share/applications/
 	cp share/deb-package-builder /usr/share/menu/
 	if [ ! -d /usr/share/sparky/deb-package-builder ]; then
