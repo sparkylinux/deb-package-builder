@@ -2,6 +2,7 @@
 Version=1.0
 Encoding=UTF-8
 Name=Deb Package Builder
+Name[de]=Deb Package-Builder
 Name[el]=Δημιουργία Πακέτου Deb
 Name[es_AR]=Constructor de Paquetes DEB
 Name[es_ES]=Creador de paquetes DEB
@@ -17,6 +18,7 @@ Name[uk]=Будувальник Пакунків Deb
 Name[zh_CN]=Deb 软件包构建工具
 GenericName=Deb Package Builder
 Comment=Builds Simple Deb Packages
+Comment[de]=Baut simple Deb-Pakete
 Comment[el]=Δημιουργία Απλών Πακέτων Deb
 Comment[es_AR]=Construye Paquetes Deb Sencillos
 Comment[es_ES]=Crea paquetes DEB simples
